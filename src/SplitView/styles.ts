@@ -38,7 +38,8 @@ export default StyleSheet.create({
     marginBottom: 10,
   },
   averageText: {
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: 'bold',
+    color: Colors.Gray
   },
 });

@@ -12,6 +12,7 @@ export default StyleSheet.create({
   },
   input: {
     height: 40,
+    color: Colors.black,
     borderColor: Colors.Gray,
     borderWidth: 1,
     marginBottom: 10,

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {SafeAreaView, ScrollView} from 'react-native';
+import {SafeAreaView, ScrollView, Vibration} from 'react-native';
 import InputForm from '../InputForm';
 import {splitFunction} from '../Constants/spliFunction';
 import SplitView from '../SplitView';
@@ -15,10 +15,12 @@ const Home = () => {
     peopleList.length > 0 ? splitFunction(peopleList).totalPaidByPerson : {};
 
   const handleAddPerson = (person: person) => {
+    Vibration.vibrate(1000);
     setPeopleList([...peopleList, person]);
   };
 
   const clearAll = () => {
+    Vibration.vibrate(1000);
     setPeopleList([]);
   };
 

@@ -13,9 +13,7 @@ const InputForm: React.FC<InputFormProps> = ({onAddPerson, clearAll}) => {
   const [amount, setAmount] = useState<string>('');
   const [amountError, setAmountError] = useState<boolean>(false);
 
-  const alphaNumbericRegEx = /^[a-zA-Z0-9!@#$%^&*()_ .]*$/;
   const numericRegEx = /^[0-9 ]*$/;
-  const alphabetsRegEx = /^[a-zA-Z_ ]*$/;
 
   const nameInputRef = useRef<TextInput>(null);
   const amtInputRef = useRef<TextInput>(null);
@@ -28,7 +26,7 @@ const InputForm: React.FC<InputFormProps> = ({onAddPerson, clearAll}) => {
     }
   };
 
-  const handleInputChange = (str: string, isName: boolean) => {
+  const handleInputChange = (str: string) => {
     if (numericRegEx.test(str)) {
       setAmount(str);
       setAmountError(false);
@@ -42,6 +40,7 @@ const InputForm: React.FC<InputFormProps> = ({onAddPerson, clearAll}) => {
       <View style={styles.insideView}>
         <TextInput
           placeholder="Name"
+          placeholderTextColor={Colors.Gray}
           value={name}
           onChangeText={setName}
           style={styles.input}
@@ -55,8 +54,9 @@ const InputForm: React.FC<InputFormProps> = ({onAddPerson, clearAll}) => {
         />
         <TextInput
           placeholder="Amount"
+          placeholderTextColor={Colors.Gray}
           value={amount}
-          onChangeText={dataStr => handleInputChange(dataStr, false)}
+          onChangeText={dataStr => handleInputChange(dataStr)}
           keyboardType="numeric"
           style={[
             styles.input,
