@@ -18,4 +18,17 @@ export default StyleSheet.create({
     paddingLeft: 10,
   },
   btnView: {flexDirection: 'row', justifyContent: 'space-evenly'},
+  button: {
+    borderColor: Colors.black,
+    paddingVertical: 12,
+    paddingHorizontal: 5,
+    borderRadius: 20,
+    backgroundColor: Colors.cyan,
+    borderWidth: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: Colors.black,
+  },
 });
