@@ -1,23 +1,26 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 import styles from './styles';
-import {finalPerson} from '../Constants/types';
+import {debtInfo, finalPerson} from '../Constants/types';
 
 interface SplitViewProps {
   splitResult: finalPerson[];
   avg: number;
   totalByPerson: {[name: string]: number};
+  debtInfo: debtInfo[];
 }
 
-const SplitView: React.FC<SplitViewProps> = ({splitResult, avg, totalByPerson}) => {
-
+const SplitView: React.FC<SplitViewProps> = ({
+  splitResult,
+  avg,
+  totalByPerson,
+  debtInfo,
+}) => {
   const renderOwedText = (person: finalPerson) => {
     if (person.remainingAmount < 0) {
       const amountOwed = -person.remainingAmount;
       return (
-        <Text style={styles.detailsText}>
-          + Owes ₹{amountOwed.toFixed(2)}
-        </Text>
+        <Text style={styles.detailsText}>+ Owes ₹{amountOwed.toFixed(2)}</Text>
       );
     } else if (person.remainingAmount > 0) {
       return (
@@ -44,10 +47,30 @@ const SplitView: React.FC<SplitViewProps> = ({splitResult, avg, totalByPerson}) 
             </Text>
           ) : (
             splitResult.map((person, index) => (
-              <View key={index} style={styles.personContainer}>
-                <Text style={styles.name}>{`${person.name} - ₹${totalByPerson[person.name]}`}</Text>
-                <View style={styles.owedContainer}>
-                  {renderOwedText(person)}
+              <View style={styles.underlineMainView}>
+                <View key={index} style={styles.personContainer}>
+                  <Text style={styles.name}>{`${person.name} - ₹${
+                    totalByPerson[person.name]
+                  }`}</Text>
+                  <View style={styles.owedContainer}>
+                    {renderOwedText(person)}
+                  </View>
+                </View>
+                <View>
+                  {debtInfo.map(debts => {
+                    if (debts.to === person.name) {
+                      console.log(debts, 'bye');
+                      return (
+                        <>
+                          <Text
+                            style={
+                              styles.debtText
+                            }>{`${debts.from} will send ₹${debts.amount}`}</Text>
+                        </>
+                      );
+                    }
+                    return null;
+                  })}
                 </View>
               </View>
             ))

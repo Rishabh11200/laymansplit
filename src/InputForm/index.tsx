@@ -13,7 +13,7 @@ const InputForm: React.FC<InputFormProps> = ({onAddPerson, clearAll}) => {
   const [amount, setAmount] = useState<string>('');
   const [amountError, setAmountError] = useState<boolean>(false);
 
-  const numericRegEx = /^[0-9 ]*$/;
+  const numericRegEx = /^[0-9 .]*$/;
 
   const nameInputRef = useRef<TextInput>(null);
   const amtInputRef = useRef<TextInput>(null);

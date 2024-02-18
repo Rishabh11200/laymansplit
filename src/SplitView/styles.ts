@@ -9,7 +9,9 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 10,
+    marginVertical: 5,
+  },
+  underlineMainView: {
     borderBottomWidth: 1,
     borderBottomColor: Colors.lightGray,
     paddingBottom: 5,
@@ -40,6 +42,13 @@ export default StyleSheet.create({
   averageText: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: Colors.Gray
+    color: Colors.darkGray,
+  },
+  debtText: {
+    color: Colors.black,
+    marginStart: 10,
+    fontStyle: 'italic',
+    marginVertical: 2,
+    fontSize: 15,
   },
 });

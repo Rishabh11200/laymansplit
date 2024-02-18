@@ -1,26 +1,34 @@
-import React, {useState} from 'react';
-import {SafeAreaView, ScrollView, Vibration} from 'react-native';
+import React, {useState, useMemo} from 'react';
+import {SafeAreaView, ScrollView, Vibration, Text} from 'react-native';
 import InputForm from '../InputForm';
-import {splitFunction} from '../Constants/spliFunction';
+import {splitFunction} from '../Constants/splitFunction';
 import SplitView from '../SplitView';
-import {SplitResult, finalPerson, person} from '../Constants/types';
+import {person} from '../Constants/types';
 
 const Home = () => {
   const [peopleList, setPeopleList] = useState<person[]>([]);
-  const splitResult =
-    peopleList.length > 0 ? splitFunction(peopleList).splitDetails : [];
-  const avg =
-    peopleList.length > 0 ? splitFunction(peopleList).avgPerPerson : 0;
-  const totalByPerson =
-    peopleList.length > 0 ? splitFunction(peopleList).totalPaidByPerson : {};
+
+  const {splitDetails, avgPerPerson, totalPaidByPerson, debtInfo} =
+    useMemo(() => {
+      if (peopleList.length > 0) {
+        return splitFunction(peopleList);
+      } else {
+        return {
+          splitDetails: [],
+          avgPerPerson: 0,
+          totalPaidByPerson: {},
+          debtInfo: [],
+        };
+      }
+    }, [peopleList]);
 
   const handleAddPerson = (person: person) => {
-    Vibration.vibrate(1000);
+    Vibration.vibrate(100);
     setPeopleList([...peopleList, person]);
   };
 
   const clearAll = () => {
-    Vibration.vibrate(1000);
+    Vibration.vibrate(100);
     setPeopleList([]);
   };
 
@@ -28,11 +36,18 @@ const Home = () => {
     <SafeAreaView>
       <ScrollView>
         <InputForm onAddPerson={handleAddPerson} clearAll={clearAll} />
-        <SplitView
-          splitResult={splitResult}
-          avg={avg}
-          totalByPerson={totalByPerson}
-        />
+        {peopleList.length > 0 ? (
+          <SplitView
+            splitResult={splitDetails}
+            avg={avgPerPerson}
+            totalByPerson={totalPaidByPerson}
+            debtInfo={debtInfo}
+          />
+        ) : (
+          <Text style={{textAlign: 'center', marginTop: 20}}>
+            Add the person's name with the amount!
+          </Text>
+        )}
       </ScrollView>
     </SafeAreaView>
   );
