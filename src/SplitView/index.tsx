@@ -38,7 +38,7 @@ const SplitView: React.FC<SplitViewProps> = ({
         <>
           <View style={styles.averageContainer}>
             <Text style={styles.averageText}>
-              Average per person: ₹{avg.toFixed(2)}
+              Total Average per person: ₹{avg.toFixed(2)}
             </Text>
           </View>
           {splitResult.length === 1 ? (
@@ -47,7 +47,7 @@ const SplitView: React.FC<SplitViewProps> = ({
             </Text>
           ) : (
             splitResult.map((person, index) => (
-              <View style={styles.underlineMainView}>
+              <View style={styles.underlineMainView} key={`person_${index}`}>
                 <View key={index} style={styles.personContainer}>
                   <Text style={styles.name}>{`${person.name} - ₹${
                     totalByPerson[person.name]
@@ -78,7 +78,7 @@ const SplitView: React.FC<SplitViewProps> = ({
         </>
       ) : (
         <Text style={styles.NoText}>
-          Add the person's name with the amount!
+          {`Add the person's name with the amount! (Equal splits only!)`}
         </Text>
       )}
     </View>

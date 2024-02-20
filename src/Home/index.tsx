@@ -45,7 +45,7 @@ const Home = () => {
           />
         ) : (
           <Text style={{textAlign: 'center', marginTop: 20}}>
-            Add the person's name with the amount!
+            {`Add the person's name with the amount! (Equal splits only!)`}
           </Text>
         )}
       </ScrollView>
